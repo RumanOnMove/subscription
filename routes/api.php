@@ -1,7 +1,8 @@
 <?php
 
-use App\Http\Controllers\Api\V1\SubscriptionController;
-use Illuminate\Http\Request;
+use App\Http\Controllers\Api\V1\PaymentGatewayController;
+use App\Http\Controllers\Api\V1\PlanController;
+use App\Http\Controllers\Api\V1\ProductController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -15,11 +16,11 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
-    return $request->user();
+Route::prefix('/v1')->group(function () {
+    Route::apiResource('payment-gateways', PaymentGatewayController::class)->only('index', 'show', 'store', 'update');
+    Route::apiResource('products', ProductController::class)->only('index', 'store', 'update');
+    Route::apiResource('plans', PlanController::class)->only('index', 'show', 'store');
+    Route::patch('plans/{plan}/activate', [PlanController::class, 'activate']);
+    Route::patch('plans/{plan}/deactivate', [PlanController::class, 'deactivate']);
 });
 
-Route::controller(SubscriptionController::class)->prefix('v1/')->group(function () {
-    Route::get('subscription/current-user-subscription', 'userCurrentSubscription');
-    Route::apiResource("subscription", SubscriptionController::class)->only("index", "store", "update");
-});
