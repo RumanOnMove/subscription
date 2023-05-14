@@ -4,7 +4,7 @@ namespace App\Http\Controllers\Api\V1;
 
 use App\Enums\PaymentGatewaySlugEnum;
 use App\Http\Controllers\Controller;
-use App\Http\Requests\StorePlanRequest;
+use App\Http\Requests\PlanStoreRequest;
 use App\Http\Resources\V1\PlanResource;
 use App\Models\PlanGroupPlan;
 use Illuminate\Http\JsonResponse;
@@ -80,10 +80,10 @@ class PlanController extends Controller
 
     /**
      * Store new plan
-     * @param StorePlanRequest $request
+     * @param PlanStoreRequest $request
      * @return PlanResource
      */
-    public function store(StorePlanRequest $request,): PlanResource
+    public function store(PlanStoreRequest $request,): PlanResource
     {
         $form = $request->validated();
         $product = Product::with("gateway")->findOrFail($form["product_id"]);

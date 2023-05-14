@@ -2,7 +2,6 @@
 
 namespace App\Modules\Subscription;
 
-use App\Enums\SubscriptionStatus;
 use App\Models\Allowance;
 use App\Models\PlanGroupPlan;
 use App\Models\ShopAllowance;
@@ -11,6 +10,7 @@ use App\Models\UserTrialPlanGroup;
 use Carbon\Carbon;
 use Illuminate\Support\Collection;
 use MoveOn\Common\Traits\Makeable;
+use MoveOn\Subscription\Enums\SubscriptionStatus;
 use MoveOn\Subscription\Models\Subscription;
 
 class SubscriptionModule
@@ -25,7 +25,6 @@ class SubscriptionModule
                 ->orWhere('status', SubscriptionStatus::STRIPE_TRIALING())
                 ->orWhere('status', SubscriptionStatus::PAYPAL_ACTIVE())
                 ->orWhere('status', SubscriptionStatus::PAYPAL_APPROVED())
-                ->orWhere('status', SubscriptionStatus::SHOPIFY_ACTIVE())
         )->first();
     }
 

@@ -8115,7 +8115,7 @@
     "aliases": [],
     "minimum-stability": "dev",
     "stability-flags": {
-        "moveon/subscription": 20
+        "moveon/common": 20
     },
     "prefer-stable": false,
     "prefer-lowest": false,

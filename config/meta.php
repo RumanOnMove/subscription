@@ -26,6 +26,7 @@ return [
         // custom tables list
 
         'custom'  => [
+            'subscription_meta'
 
             // example : 'posts_meta' , 'users_meta'
 

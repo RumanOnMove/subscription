@@ -15,7 +15,7 @@ use MoveOn\Subscription\Enums\QuantitySource;
 use MoveOn\Subscription\Enums\UsageType;
 use MoveOn\Subscription\Models\Product;
 
-class StorePlanRequest extends FormRequest
+class PlanStoreRequest extends FormRequest
 {
     use Validatable;
 
@@ -43,7 +43,7 @@ class StorePlanRequest extends FormRequest
         $lastTierItemIndex = $totalTierItems > 0 ? $totalTierItems - 1 : 0;
         $product = Product::find($this->get("product_id"));
         $gatewaySlug = $product?->gateway?->slug;
-        $availableIntervalUnits = $gatewaySlug == IntervalUnit::values();
+        $availableIntervalUnits = IntervalUnit::values();
 
         $rules = [
             "product_id"          => ["required", Rule::exists((new Product())->getTable(), "id")],
